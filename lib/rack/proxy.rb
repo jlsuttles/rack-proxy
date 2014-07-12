@@ -25,7 +25,7 @@ module Rack
       end
 
       def normalize_headers(headers)
-        mapped = headers.map do|k, v| 
+        mapped = headers.map do|k, v|
           [k, if v.is_a? Array then v.join("\n") else v end]
         end
         Hash[mapped]
@@ -80,7 +80,7 @@ module Rack
       # Setup body
       if target_request.request_body_permitted? && source_request.body
         target_request.body_stream    = source_request.body
-        target_request.content_length = source_request.content_length.to_i
+        target_request.content_length = source_request.content_length if source_request.content_length && source_request.content_length != ""
         target_request.content_type   = source_request.content_type if source_request.content_type
         target_request.body_stream.rewind
       end
