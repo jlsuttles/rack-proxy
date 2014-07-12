@@ -80,6 +80,7 @@ module Rack
       # Setup body
       if target_request.request_body_permitted? && source_request.body
         target_request.body_stream    = source_request.body
+        target_request.content_length = 100
         target_request.content_type   = source_request.content_type if source_request.content_type
         target_request.body_stream.rewind
       end
